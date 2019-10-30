@@ -41,15 +41,18 @@ class InterpreterSelector:
 
 @hookimpl
 def tox_addoption(parser):  # noqa: D103
+    help_text = (
+        'list of <regex>=<path> lines -- the testenv name will be checked '
+        'against all the regexes, in order: the first match determines the '
+        'Python interpreter that will be used as base Python to create the '
+        'virtual environment; in case of no match, the standard interpreter '
+        'resolution applies',
+    )
     parser.add_testenv_attribute(
         name='interpreter',
         type='line-list',
         default=[],
-        help='list of <regex>=<path> lines -- the testenv name will be '
-        'checked against all the regexes, in order: the first match '
-        'determines the Python interpreter that will be used as base Python '
-        'to create the virtual environment; in case of no match, the standard '
-        'interpreter resolution applies',
+        help=help_text,
         postprocess=InterpreterSelector().select,
     )
 
