@@ -8,7 +8,7 @@ from tox_interpreters.hooks import tox_addoption, tox_get_python_executable
 def test_config_option():
     parser = mock.Mock()
     tox_addoption(parser)
-    parser.add_testenv_attribute.assert_called_once()
+    assert parser.add_testenv_attribute.call_count == 1
 
 
 def test_python_executable_found(capfd, envconfig):
